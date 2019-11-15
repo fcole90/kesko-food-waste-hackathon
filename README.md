@@ -32,3 +32,7 @@ We have no expiry date API available, so we estimate the amount of *close-expiry
 - Return a group of K-markets to cover all food items (like if K1 doesn't have fish, also optimise for a K2)
 - Gamify the app to make users compete on sustinability
 - Group items brandless (like just *milk*, then autoselect a brand which many items on close expiry)
+
+
+## APIs
+Frontend should send JSON as `list` of `string`. Where each string is a unique **product identifier**.
