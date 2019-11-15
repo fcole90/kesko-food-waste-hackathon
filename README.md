@@ -1,7 +1,7 @@
 # Green K - Vihreä K
 K-group app for reducing food waste by optimising consumer consumption and maket store optimisation.
 
-## Kesko, kustomer, kestävä
+## Kesko, kustomers, kestävä
 The apps aims at food sustainability by reducing food waste. This is done in a double way:
 - directing customers to buy *expire-soon* food;
 - gathering customers data habits for K-markets to better optimise future store updates.
