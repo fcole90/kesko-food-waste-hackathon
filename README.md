@@ -1,4 +1,4 @@
-# Green K - Vihreä K
+# fresKo
 K-group app for reducing food waste by optimising consumer consumption and market store optimisation.
 
 ## Kesko, kustomers, kestävä
