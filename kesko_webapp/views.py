@@ -20,9 +20,7 @@ def index_api(request):
     -------
 
     """
-    data = {
-        "is_online": True
-    }
+    data = request.GET
     return JsonResponse(data=data)
     # return JsonResponse(data=get_nearest_markets(23.55, 23.66, 5))
 
