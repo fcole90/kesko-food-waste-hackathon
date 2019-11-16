@@ -21,7 +21,6 @@ from kesko_food_waste import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls), # Admininstration panel
-    path('/', include('kesko_webapp.urls')) # We set the root to the Kesko webapp
-]
-+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
-              + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('api/', include('kesko_webapp.urls')) # We set the root to the Kesko webapp
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
+  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
