@@ -35,13 +35,13 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'kesko_webapp.apps.KeskoWebappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'kesko_webapp.apps.KeskoWebappConfig',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +131,5 @@ MEDIA_URL = '/media/'
 DATA_ROOT = os.path.join(BASE_DIR, "data")
 PRIVATE_DATA_ROOT = os.path.join(DATA_ROOT, "private")
 PUBLIC_DATA_ROOT = os.path.join(BASE_DIR, "public")
+
+AUTH_USER_MODEL = 'kesko_webapp.User'
