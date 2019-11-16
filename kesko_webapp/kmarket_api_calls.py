@@ -28,7 +28,12 @@ def get_nearest_markets(lon, lat, distance):
 
     r = requests.post(url, data=json.dumps(payload), headers=headers)
 
-    return json.loads(r.content)
+    data = []
+    for result in json.loads(r.content)["results"]:
+        temp = {"id": result["Id"], "name": result["Name"], "coordinates": result["Coordinate"]}
+        data.append(temp)
+
+    return data
 
 
 def get_available_markets(ean):
@@ -41,5 +46,26 @@ def get_available_markets(ean):
 
     r = requests.get(url, data=json.dumps(payload), headers=headers)
 
-    return json.loads(r.content)
 
+    data = []
+    for store in json.loads(r.content)[0]["stores"]:
+        temp = {"id": store["id"]}
+        data.append(temp)
+
+    return data
+
+    #return json.loads(r.content)
+
+
+def combine(inside_circle, available):
+    my_map = {}
+    common_markets = []
+
+    for market in inside_circle:
+        my_map[market["id"]] = True
+
+    for market in available:
+        if market["id"] in my_map:
+            common_markets.append(market)
+
+    return common_markets

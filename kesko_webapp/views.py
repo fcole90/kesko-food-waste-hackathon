@@ -47,7 +47,7 @@ def nearest_markets(request):
     lon = request.GET.get('lon', 0)
     lat = request.GET.get('lat', 0)
     distance = request.GET.get('distance', 0)
-    return JsonResponse(get_nearest_markets(lon, lat, distance))
+    return JsonResponse(get_nearest_markets(lon, lat, distance), safe=False)
 
 
 def available_markets(request):
