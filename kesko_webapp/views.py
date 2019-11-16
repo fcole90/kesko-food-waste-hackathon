@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 # from django.shortcuts import render
-from kesko_webapp.kmarket_api_calls import get_nearest_markets
+from kesko_webapp.kmarket_api_calls import get_nearest_markets, get_available_markets
 
 
 def index_api(request):
@@ -43,3 +43,7 @@ def nearest_markets(request):
     lat = request.GET.get('lat', 0)
     distance = request.GET.get('distance', 0)
     return JsonResponse(get_nearest_markets(lon, lat, distance))
+
+def available_markets(request):
+    ean = request.GET.get('ean', "0")
+    return JsonResponse(get_available_markets(ean), safe=False)
