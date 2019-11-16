@@ -1,5 +1,6 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+# from django.shortcuts import render
+from kesko_webapp.kmarket_api_calls import get_nearest_markets
 
 
 def index_api(request):
@@ -35,3 +36,10 @@ def optimise_market_food_waste(request):
             }
         ]
     })
+
+
+def nearest_markets(request):
+    lon = request.GET.get('lon', 0)
+    lat = request.GET.get('lat', 0)
+    distance = request.GET.get('distance', 0)
+    return JsonResponse(get_nearest_markets(lon, lat, distance))
