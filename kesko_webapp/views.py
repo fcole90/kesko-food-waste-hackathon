@@ -24,6 +24,7 @@ def index_api(request):
         "is_online": True
     }
     return JsonResponse(data=data)
+    # return JsonResponse(data=get_nearest_markets(23.55, 23.66, 5))
 
 
 def optimise_market_food_waste(request):
