@@ -1,5 +1,7 @@
 from django.http import JsonResponse
 # from django.shortcuts import render
+from django.shortcuts import render
+
 from kesko_webapp.kmarket_api_calls import get_nearest_markets
 
 def frontend(request):
