@@ -53,7 +53,7 @@ def nearest_markets(request):
 
 def available_markets(request):
     ean = request.GET.get('ean', "0")
-    return JsonResponse(get_available_markets(ean), safe=False)
+    return JsonResponse(get_available_markets(ean))
 
 
 def product_id(request):
