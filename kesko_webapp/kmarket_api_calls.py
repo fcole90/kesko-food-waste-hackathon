@@ -73,7 +73,7 @@ def get_product_id(query):
         "query": query
     }
     headers = {
-        "Ocp-Apim-Subscription-Key": key,
+        "Ocp-Apim-Subscription-Key": settings.KESKO_API_KEY,
         "Content-Type": "application/json",
         "Accept": "application/json"
     }
