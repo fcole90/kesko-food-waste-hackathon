@@ -26,6 +26,7 @@ SECRET_KEY = 'fxwzbi1kora+nydqwjn$azh58-e=bbq$f_=98y27!fusqk66*4'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "localhost",
     "127.0.0.1",
     "fabioaalto.pythonanywhere.com"
 ]
@@ -126,3 +127,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+DATA_ROOT = os.path.join(BASE_DIR, "data")
+PRIVATE_DATA_ROOT = os.path.join(DATA_ROOT, "private")
+PUBLIC_DATA_ROOT = os.path.join(BASE_DIR, "public")

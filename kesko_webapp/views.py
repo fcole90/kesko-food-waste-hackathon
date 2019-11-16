@@ -2,6 +2,8 @@ from django.http import JsonResponse
 # from django.shortcuts import render
 from kesko_webapp.kmarket_api_calls import get_nearest_markets
 
+def frontend(request):
+    return render(request, 'kesko_webapp/frontend.html')
 
 def index_api(request):
     """
