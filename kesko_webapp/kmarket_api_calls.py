@@ -1,12 +1,10 @@
 import requests
 import json
 
-
-key = "16e6175abde7464ba975ca6a63c532e7"
+from kesko_food_waste import settings
 
 
 def get_nearest_markets(lon, lat, distance):
-
     url = 'https://kesko.azure-api.net/v1/search/stores'
     payload = {
         "filters": {
@@ -21,7 +19,7 @@ def get_nearest_markets(lon, lat, distance):
     }
 
     headers = {
-        "Ocp-Apim-Subscription-Key": key,
+        "Ocp-Apim-Subscription-Key": settings.KESKO_API_KEY,
         "Content-Type": "application/json",
         "Accept": "application/json"
     }
@@ -37,11 +35,10 @@ def get_nearest_markets(lon, lat, distance):
 
 
 def get_available_markets(ean):
-
     url = 'https://kesko.azure-api.net/v2/products?ean=' + ean
     payload = {}
     headers = {
-        "Ocp-Apim-Subscription-Key": key
+        "Ocp-Apim-Subscription-Key": settings.KESKO_API_KEY
     }
 
     r = requests.get(url, data=json.dumps(payload), headers=headers)
@@ -53,8 +50,6 @@ def get_available_markets(ean):
         data.append(temp)
 
     return data
-
-    #return json.loads(r.content)
 
 
 def combine(inside_circle, available):

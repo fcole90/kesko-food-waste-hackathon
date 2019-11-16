@@ -146,3 +146,5 @@ PRIVATE_DATA_ROOT = os.path.join(DATA_ROOT, "private")
 PUBLIC_DATA_ROOT = os.path.join(BASE_DIR, "public")
 
 AUTH_USER_MODEL = 'kesko_webapp.User'
+
+KESKO_API_KEY = "16e6175abde7464ba975ca6a63c532e7"
