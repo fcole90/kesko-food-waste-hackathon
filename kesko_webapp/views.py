@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 
-from kesko_webapp.kmarket_api_calls import get_nearest_markets, get_available_markets
+from kesko_webapp.kmarket_api_calls import get_nearest_markets, get_available_markets, get_product_id
 
 
 def frontend(request):
@@ -53,3 +53,8 @@ def nearest_markets(request):
 def available_markets(request):
     ean = request.GET.get('ean', "0")
     return JsonResponse(get_available_markets(ean), safe=False)
+
+
+def product_id(request):
+    query = request.GET.get('query', "0")
+    return JsonResponse(get_product_id(query), safe=False)

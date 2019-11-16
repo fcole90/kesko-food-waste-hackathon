@@ -69,3 +69,25 @@ def combine(inside_circle, available):
             common_markets.append(market)
 
     return common_markets
+
+
+def get_product_id(query):
+
+    url = 'https://kesko.azure-api.net/v1/search/products'
+    payload = {
+        "query": query
+    }
+    headers = {
+        "Ocp-Apim-Subscription-Key": key,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+
+    r = requests.post(url, data=json.dumps(payload), headers=headers)
+
+    data = []
+    for result in json.loads(r.content)["results"]:
+        temp = {"ean": result["ean"], "pictureUrls": result["pictureUrls"], "labelName": result["labelName"]}
+        data.append(temp)
+
+    return data
