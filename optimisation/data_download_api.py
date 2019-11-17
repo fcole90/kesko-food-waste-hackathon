@@ -138,6 +138,7 @@ def add_mock_data():
         market["availableProducts"] = [
             {
                 "ean": items_json_data[item]["ean"],
+                "labelName": items_json_data[item]["labelName"]["english"],
                 "item_index": item,
                 "amount": int(np.random.randint(0, 500)),
                 "amountOnCloseExpiry": int(np.random.randint(0, 15) if items_json_data[item]["category"]["finnish"] in ["Maitokaappi", "Tuoretori"] else np.random.randint(0, 5)),
@@ -149,7 +150,8 @@ def add_mock_data():
             {
                 "market_index": market_index,
                 "Coordinate": market["Coordinate"],
-                "availableProducts": market["availableProducts"]
+                "availableProducts": market["availableProducts"],
+                "Name": market["Name"]
             }
         )
 
@@ -182,16 +184,17 @@ if __name__ == "__main__":
     # main()
     # stores_to_dataset()
     # products_to_dataset()
-    # add_mock_data()
-    kmarkets_json_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "kmarket_all.json")
-    items_json_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "products_all.json")
-    data_market_id_item_ean_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "data_market_id_item_ean_all.json")
-
-    with open(kmarkets_json_filename) as kmarkets_json_file:
-        kmarkets_data = json.load(kmarkets_json_file)
-
-    with open(items_json_filename) as items_json_file:
-        items_json_data = json.load(items_json_file)
-
-    print([item["ean"] for item in items_json_data])
-    print(kmarkets_data[0]["Coordinate"])
+    add_mock_data()
+    # kmarkets_json_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "kmarket_all.json")
+    # items_json_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "products_all.json")
+    # data_market_id_item_ean_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "data_market_id_item_ean_all.json")
+    #
+    # with open(kmarkets_json_filename) as kmarkets_json_file:
+    #     kmarkets_data = json.load(kmarkets_json_file)
+    #
+    # with open(items_json_filename) as items_json_file:
+    #     items_json_data = json.load(items_json_file)
+    #
+    # print([item["ean"] for item in items_json_data])
+    # print(kmarkets_data[0])
+    # print(items_json_data[0])

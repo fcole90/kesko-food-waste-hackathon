@@ -34,7 +34,8 @@ def mutation(gene, market_list, mutation_p=0.9):
         mutation_factor_hop = np.random.rand()
         if mutation_factor_hop < mutation_p:
             a, b = np.random.randint(0, len(gene)), np.random.randint(0, len(market_list))
-            gene[a] = market_list[b]
+            if market_list[b] not in gene:
+                gene[a] = market_list[b]
     return gene
 
 

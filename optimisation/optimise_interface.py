@@ -3,6 +3,8 @@ import os
 
 from kesko_food_waste import settings
 from optimisation import optimise
+from optimisation.utils import get_geodesic_distance, get_market_coordinates
+
 
 def get_some_ean():
     items_json_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "products_all.json")
@@ -18,11 +20,21 @@ def get_ranked_markets_interface(ean_items_list, user_position, max_time=None):
     with open(data_market_id_item_ean_filename) as data_market_id_item_ean_file:
         data_market_id_item_ean = json.load(data_market_id_item_ean_file)
 
+    # Only include the markets in the neighbourhood, extend only if very few
+    while True:
+        max_distance = 25
+        close_markets_list = [market for market in data_market_id_item_ean if
+                              get_geodesic_distance(*user_position, *get_market_coordinates(market)) < 25]
+        if len(close_markets_list) >= 5:
+            break
+        else:
+            max_distance += 10
+
     best_rank, best_rank_costs = optimise.get_best_ranked_markets(
-        market_list=data_market_id_item_ean,
+        market_list=close_markets_list,
         items_list=ean_items_list,
         user_position=user_position,
-        distance_weight=100,
+        distance_weight=500,
         completeness_weight=10,
         threshold_cost=None,
         max_iterations=500,
