@@ -36,3 +36,6 @@ We have no expiry date API available, so we estimate the amount of *close-expiry
 
 ## APIs
 Frontend should send JSON as `list` of `string`. Where each string is a unique **product identifier**.
+
+## Initialisation
+Before running the server run the script `/optimisation/data_download_api.py` which is needed for data retrivial and augmentation, and fast analysis.
