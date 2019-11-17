@@ -9,5 +9,7 @@ urlpatterns = [
     path('nearest_markets', views.nearest_markets, name="nearest_markets"),
     path('frontend/', views.frontend, name="frontend"),
     path('available_markets', views.available_markets, name="available_markets"),
-    path('product_id', views.product_id, name="product_id")
+    path('product_id', views.product_id, name="product_id"),
+    path('final_stores', views.final_stores, name="final_stores"),
+
 ]

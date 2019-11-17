@@ -4,7 +4,7 @@ from django.http import JsonResponse, HttpResponseBadRequest
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-from kesko_webapp.kmarket_api_calls import get_nearest_markets, get_available_markets, get_product_id
+from kesko_webapp.kmarket_api_calls import get_nearest_markets, get_available_markets, get_product_id, get_final_stores
 from optimisation.optimise_interface import get_ranked_markets_interface
 
 
@@ -71,3 +71,11 @@ def available_markets(request):
 def product_id(request):
     query = request.GET.get('query', "0")
     return JsonResponse(get_product_id(query), safe=False)
+
+
+def final_stores(request):
+    lon = request.GET.get('lon', 0)
+    lat = request.GET.get('lat', 0)
+    distance = request.GET.get('distance', 1)
+    ean = request.GET.get('ean', "0")
+    return JsonResponse(get_final_stores(ean, lon, lat, distance), safe=False)

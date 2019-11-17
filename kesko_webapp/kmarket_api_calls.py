@@ -56,14 +56,22 @@ def combine(inside_circle, available):
     my_map = {}
     common_markets = []
 
-    for market in inside_circle:
-        my_map[market["id"]] = True
-
     for market in available:
+        my_map[market["id"]] = market
+
+    for market in inside_circle:
         if market["id"] in my_map:
             common_markets.append(market)
 
     return common_markets
+
+
+def get_final_stores(ean, lon, lat, distance):
+    nearest = get_nearest_markets(lon, lat, distance)
+    available = get_available_markets(ean)
+
+    return combine(nearest, available)
+
 
 
 def get_product_id(query):
