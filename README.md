@@ -32,10 +32,14 @@ We have no expiry date API available, so we estimate the amount of *close-expiry
 - Return a group of K-markets to cover all food items (like if K1 doesn't have fish, also optimise for a K2)
 - Gamify the app to make users compete on sustinability
 - Group items brandless (like just *milk*, then autoselect a brand which many items on close expiry)
+- Suggest accurate quantities based on recipe portions amount
 
 
-## APIs
-Frontend should send JSON as `list` of `string`. Where each string is a unique **product identifier**.
 
 ## Initialisation
 Before running the server run the script `/optimisation/data_download_api.py` which is needed for data retrivial and augmentation, and fast analysis.
+
+## Frontend / Backend
+Frontend and backend are separate. The frontend can be deployed on something that supports React.js, like [Netlify](https://www.pythonanywhere.com/), while the backend is a Django app which is used to retrieve APIs, which can be hosted for example on [python anywhere](https://www.pythonanywhere.com/).
+
+**Note** python anywhere works with proxies and may not work with K-group APIs.
