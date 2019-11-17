@@ -1,7 +1,11 @@
-from django.http import JsonResponse
+import json
+
+from django.http import JsonResponse, HttpResponseBadRequest
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 from kesko_webapp.kmarket_api_calls import get_nearest_markets, get_available_markets, get_product_id
+from optimisation.optimise_interface import get_ranked_markets_interface
 
 
 def frontend(request):
@@ -24,22 +28,32 @@ def index_api(request):
     return JsonResponse(data=data)
     # return JsonResponse(data=get_nearest_markets(23.55, 23.66, 5))
 
-
+@csrf_exempt
 def optimise_market_food_waste(request):
-    return JsonResponse(data={
-        "store_list": [
-            {
-                "storeId": "C122",
-                "optimisation_cost": 12.5,
-                "items": [
-                    {
-                        "ean": "291828880199",
-                        "name": "Coca-Cola"
-                    }
-                ]
-            }
-        ]
-    })
+    # return HttpResponseBadRequest()
+    data = json.loads(request.body)
+    print(type(data))
+    print(data)
+    print(request.GET)
+    print()
+    print(data.keys())
+    ean_items_list = data.get("items", None)
+    user_lat = data.get("user_lat", None)
+    user_lon = data.get("user_lon", None)
+    max_time = data.get("max_time", None)
+
+    if ean_items_list is None:
+        return HttpResponseBadRequest("Missing required parameter 'items':"
+                                      " Should contain a list of dictionaries\n"
+                                      "containing valid 'ean' keys.")
+    if None in [user_lat, user_lon]:
+        return HttpResponseBadRequest("Missing required parameters 'user_lat', 'user_lon'")
+
+    try:
+        best_rank, best_rank_costs = get_ranked_markets_interface(ean_items_list, (user_lat, user_lon), max_time)
+        return JsonResponse({"best_ranked_markets": best_rank, "best_ranked_costs": best_rank_costs})
+    except Exception as e:
+        return HttpResponseBadRequest(f"Something went wrong: {e.__repr__()}")
 
 
 def nearest_markets(request):

@@ -3,6 +3,7 @@ import os
 
 import requests
 import pandas as pd
+import numpy as np
 
 from kesko_food_waste import settings
 
@@ -91,7 +92,7 @@ def stores_to_dataset():
     dataframe_file_name = "kmarket_all"
     try:
         dataframe.to_csv(path_or_buf=os.path.join(settings.PRIVATE_DATA_ROOT, dataframe_file_name + ".csv"))
-        dataframe.to_json(path_or_buf=os.path.join(settings.PRIVATE_DATA_ROOT, dataframe_file_name + ".json"))
+        # dataframe.to_json(path_or_buf=os.path.join(settings.PRIVATE_DATA_ROOT, dataframe_file_name + ".json"))
         with open(os.path.join(settings.PRIVATE_DATA_ROOT, dataframe_file_name + ".json"), "w") as products_file:
             json.dump(obj=store_data, fp=products_file)
     except Exception as e:
@@ -119,6 +120,7 @@ def products_to_dataset():
 def add_mock_data():
     kmarkets_json_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "kmarket_all.json")
     items_json_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "products_all.json")
+    data_market_id_item_ean_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "data_market_id_item_ean_all.json")
 
     with open(kmarkets_json_filename) as kmarkets_json_file:
         kmarkets_data = json.load(kmarkets_json_file)
@@ -126,9 +128,39 @@ def add_mock_data():
     with open(items_json_filename) as items_json_file:
         items_json_data = json.load(items_json_file)
 
-    for i, market in enumerate(kmarkets_data):
-        if market["Municipality"] in ["HELSINKI", "ESPOO", "VANTAA"]:
-            print(i, json.dumps(market, indent=4, sort_keys=True))
+    # for i, market in enumerate(kmarkets_data):
+    #     if market["Municipality"] in ["HELSINKI", "ESPOO", "VANTAA"]:
+    #         print(i, json.dumps(market, indent=4, sort_keys=True))
+
+    data_market_id_item_ean = list()
+
+    for market_index, market in enumerate(kmarkets_data):
+        market["availableProducts"] = [
+            {
+                "ean": items_json_data[item]["ean"],
+                "item_index": item,
+                "amount": int(np.random.randint(0, 500)),
+                "amountOnCloseExpiry": int(np.random.randint(0, 15) if items_json_data[item]["category"]["finnish"] in ["Maitokaappi", "Tuoretori"] else np.random.randint(0, 5)),
+            }
+            # A random number of random items are available product
+            for item in [np.random.randint(0, len(items_json_data)) for _ in range(np.random.randint(0, len(items_json_data)))]
+        ]
+        data_market_id_item_ean.append(
+            {
+                "market_index": market_index,
+                "Coordinate": market["Coordinate"],
+                "availableProducts": market["availableProducts"]
+            }
+        )
+
+    with open(kmarkets_json_filename, "w") as kmarkets_json_file:
+        json.dump(fp=kmarkets_json_file, obj=kmarkets_data)
+
+    with open(data_market_id_item_ean_filename, "w") as data_market_id_item_ean_file:
+        json.dump(fp=data_market_id_item_ean_file, obj=data_market_id_item_ean)
+
+    print("Dataset updated")
+
 
 
     # print(json.dumps([(i, items_json_data[i]["labelName"]["english"]) for i in range(len(items_json_data))],
@@ -150,4 +182,16 @@ if __name__ == "__main__":
     # main()
     # stores_to_dataset()
     # products_to_dataset()
-    add_mock_data()
+    # add_mock_data()
+    kmarkets_json_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "kmarket_all.json")
+    items_json_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "products_all.json")
+    data_market_id_item_ean_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "data_market_id_item_ean_all.json")
+
+    with open(kmarkets_json_filename) as kmarkets_json_file:
+        kmarkets_data = json.load(kmarkets_json_file)
+
+    with open(items_json_filename) as items_json_file:
+        items_json_data = json.load(items_json_file)
+
+    print([item["ean"] for item in items_json_data])
+    print(kmarkets_data[0]["Coordinate"])
