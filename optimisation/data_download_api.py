@@ -134,6 +134,7 @@ def add_mock_data():
 
     data_market_id_item_ean = list()
 
+
     for market_index, market in enumerate(kmarkets_data):
         market["availableProducts"] = [
             {
@@ -144,12 +145,13 @@ def add_mock_data():
                 "amountOnCloseExpiry": int(np.random.randint(0, 15) if items_json_data[item]["category"]["finnish"] in ["Maitokaappi", "Tuoretori"] else np.random.randint(0, 5)),
             }
             # A random number of random items are available product
-            for item in [np.random.randint(0, len(items_json_data)) for _ in range(np.random.randint(0, len(items_json_data)))]
+            for item in [np.random.randint(0, len(items_json_data)) for _ in range(np.random.randint(len(items_json_data)*76//100, len(items_json_data)))]
         ]
         data_market_id_item_ean.append(
             {
                 "market_index": market_index,
                 "Coordinate": market["Coordinate"],
+                "gmapsLink": f"https://www.google.com/maps/search/{market['Name'].replace(' ', '+')}/@{market['Coordinate']['Latitude']},{market['Coordinate']['Longitude']}",
                 "availableProducts": market["availableProducts"],
                 "Name": market["Name"]
             }
@@ -181,10 +183,11 @@ def add_mock_data():
 
 
 if __name__ == "__main__":
-    # main()
-    # stores_to_dataset()
-    # products_to_dataset()
+    os.makedirs(os.path.join(settings.PRIVATE_DATA_ROOT), exist_ok=True)
+    stores_to_dataset()
+    products_to_dataset()
     add_mock_data()
+
     # kmarkets_json_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "kmarket_all.json")
     # items_json_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "products_all.json")
     # data_market_id_item_ean_filename = os.path.join(settings.PRIVATE_DATA_ROOT, "data_market_id_item_ean_all.json")
