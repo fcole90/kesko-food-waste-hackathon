@@ -9,6 +9,13 @@ K-group app for reducing food waste by optimising consumer consumption and marke
 
 Find a pdf presentation [here](https://github.com/fcole90/kesko-food-waste-hackathon/releases/download/final/fresko-hackathon-junction-2019-presentation.pdf).
 
+## Team
+Fabio Colella<br/>
+Mamdouh El Nakeeb<br/>
+Abhishek Singh<br/>
+Wissa Azmy<br/>
+Agisilaos Kounelis<br/>
+
 ## Kesko, kustomers, kestävä
 The apps aims at food sustainability by reducing food waste. This is done in a double way:
 - directing customers to buy *expire-soon* food;
