@@ -1,7 +1,7 @@
 # fresKo
 K-group app for reducing food waste by optimising consumer consumption and market store optimisation.
 
-![fresKo logo, using the K-market K](https://github.com/fcole90/kesko-food-waste-hackathon/releases/download/final/fresKo_logo.png)
+<img alt="fresKo logo, using the K-market K" src="https://github.com/fcole90/kesko-food-waste-hackathon/releases/download/final/fresKo_logo.png">
 
 Find a pdf presentation [here](https://github.com/fcole90/kesko-food-waste-hackathon/releases/download/final/fresko-hackathon-junction-2019-presentation.pdf).
 
