@@ -1,4 +1,5 @@
 # fresKo
+## Hackathon Junction 2019
 K-group app for reducing food waste by optimising consumer consumption and market store optimisation.
 
 <img alt="fresKo logo, using the K-market K" src="https://user-images.githubusercontent.com/1292230/69498384-27269000-0ef0-11ea-90f3-e013ed9dd714.png" width=45%>
