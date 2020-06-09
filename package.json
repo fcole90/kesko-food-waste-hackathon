@@ -20,7 +20,7 @@
     "style-loader": "^0.23.1"
   },
   "devDependencies": {
-    "react-scripts": "3.0.0"
+    "react-scripts": "3.4.1"
   },
   "resolutions": {
     "babel-jest": "24.7.1"
